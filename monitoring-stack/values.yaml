@@ -1,5 +1,12 @@
+metrics-server:
+  image:
+    repository: registry.k8s.io/metrics-server/metrics-server
+    tag: "v0.6.4"
+  fullnameOverride: "metrics-server"
+
 prometheus:
   server:
+    fullnameOverride: prometheus-server
     image: 
       repository: quay.io/prometheus/prometheus
       tag: v2.48.1
@@ -9,6 +16,9 @@ prometheus:
       scrape_interval: 10s
 
     persistentVolume:
+      ## Prometheus server data Persistent Volume Storage Class
+      storageClass: "nfs-retain-app"  
+
       ## Prometheus server data Persistent Volume size
       size: 8Gi
 
@@ -62,6 +72,7 @@ prometheus-operator-crds:
     annotations: {}
 
 grafana:
+  fullnameOverride: grafana
   image: 
     # -- The Docker registry
     registry: docker.io
@@ -69,7 +80,12 @@ grafana:
     repository: grafana/grafana
     # Overrides the Grafana image tag whose default is the chart appVersion
   tag: 10.2.3
-
+  
+  ## Expose the grafana service to be accessed from outside the cluster (LoadBalancer service).
+  ## or access it from within the cluster (ClusterIP service). Set the service type and the port to serve it.
+  service:
+    port: 80
+  
   testFramework:
     enabled: true
     image:
@@ -96,7 +112,7 @@ grafana:
   persistence:
     type: pvc
     enabled: true
-    # storageClassName: default
+    storageClassName: nfs-retain-app
     size: 10Gi
 
   initChownData:
@@ -133,7 +149,7 @@ grafana:
       datasources:
       - name: Prometheus
         type: prometheus
-        url: http://prometheus-server:9090
+        url: http://prometheus-server
         access: proxy
         isDefault: true
         jsonData:
@@ -149,3 +165,12 @@ grafana:
       tag: 1.25.2
     resources: {}
 
+# ingress
+sdsIngress:
+  enabled: true
+
+  nginx:
+    enabled: true
+
+    className: nginx
+    host: t3-grafana.gitopsconsole.com

@@ -12,6 +12,7 @@ spec:
   - http:
       paths:
       - path: /grafana(/|$)(.*)
+        pathType: Prefix
         backend: 
           service: 
             name: "{{ .Values.grafana.fullnameOverride }}"

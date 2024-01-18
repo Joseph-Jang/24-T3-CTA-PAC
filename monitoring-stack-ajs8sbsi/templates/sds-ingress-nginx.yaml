@@ -9,8 +9,7 @@ metadata:
 spec:
   ingressClassName: {{ .Values.sdsIngress.nginx.className }}  
   rules:
-  - host: "*"
-    http:
+  - http:
       paths:
       - path: /grafana(/|$)(.*)
         pathType: ImplementationSpecific

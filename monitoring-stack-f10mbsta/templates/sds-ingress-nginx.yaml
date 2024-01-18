@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: {{ .Values.grafana.fullnameOverride }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /grafana(/|$)(.*)
+        pathType: Prefix
+        backend: 
+          service: 
+            name: "{{ .Values.grafana.fullnameOverride }}"
+            port:
+              number: {{ .Values.grafana.service.port }}

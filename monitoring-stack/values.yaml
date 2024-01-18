@@ -136,7 +136,7 @@ grafana:
   
   # Administrator credentials when not using an existing secret
   adminUser: admin
-  # adminPassword: strongpassword
+  adminPassword: admin
 
   env:
     GF_AUTH_ANONYMOUS_ENABLED: false
@@ -164,3 +164,8 @@ grafana:
       repository: kiwigrid/k8s-sidecar
       tag: 1.25.2
     resources: {}
+
+  grafana.ini:
+    server:
+      root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+      serve_from_sub_path: true

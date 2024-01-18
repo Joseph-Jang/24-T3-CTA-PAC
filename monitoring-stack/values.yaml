@@ -164,13 +164,3 @@ grafana:
       repository: kiwigrid/k8s-sidecar
       tag: 1.25.2
     resources: {}
-
-# ingress
-sdsIngress:
-  enabled: true
-
-  nginx:
-    enabled: true
-
-    className: nginx
-    host: t3-grafana.gitopsconsole.com

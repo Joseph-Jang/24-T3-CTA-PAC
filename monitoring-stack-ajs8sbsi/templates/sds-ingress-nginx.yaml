@@ -11,8 +11,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /grafana/?(.*)
-        pathType: ImplementationSpecific
+      - path: /grafana(/|$)(.*)
         backend: 
           service: 
             name: "{{ .Values.grafana.fullnameOverride }}"

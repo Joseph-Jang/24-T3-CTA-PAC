@@ -167,4 +167,5 @@ grafana:
 
   grafana.ini:
     server:
+      root_url: "https://t3-grafana.sdsdev.co.kr/grafana/"
       serve_from_sub_path: true

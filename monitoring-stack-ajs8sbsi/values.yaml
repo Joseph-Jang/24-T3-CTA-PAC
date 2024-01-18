@@ -136,7 +136,7 @@ grafana:
   
   # Administrator credentials when not using an existing secret
   adminUser: admin
-  # adminPassword: strongpassword
+  adminPassword: admin
 
   env:
     GF_AUTH_ANONYMOUS_ENABLED: false

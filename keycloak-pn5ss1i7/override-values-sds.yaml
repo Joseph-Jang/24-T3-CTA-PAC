@@ -43,5 +43,5 @@ pgchecker:
     tag: 1.32
 
 postgresql:
-  persistence:
+  global:
     storageClass: "nfs-retain-app"

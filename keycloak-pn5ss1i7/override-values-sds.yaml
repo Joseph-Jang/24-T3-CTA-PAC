@@ -7,6 +7,15 @@ image:
   # Overrides the Keycloak image tag whose default is the chart appVersion
   tag: "17.0.1-legacy"
 
+# Pod resource requests and limits
+resources: {}
+  # requests:
+  #   cpu: "500m"
+  #   memory: "1024Mi"
+  # limits:
+  #   cpu: "500m"
+  #   memory: "1024Mi"
+
 contextPath: identity/connect/auth
 
 # Startup scripts to run before Keycloak starts up
@@ -25,3 +34,13 @@ startupScripts:
     {{- end }}
     run-batch
     stop-embedded-server
+
+pgchecker:
+  image:
+    # Docker image used to check Postgresql readiness at startup
+    repository: docker.io/busybox
+    # Image tag for the pgchecker image
+    tag: 1.32
+
+postgresql:
+  storageClass: "nfs-retain-app"

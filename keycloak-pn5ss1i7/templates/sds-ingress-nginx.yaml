@@ -10,7 +10,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /identity/connect(/|$)(.*)
+      - path: /identity/connect
         pathType: Prefix
         backend: 
           service: 

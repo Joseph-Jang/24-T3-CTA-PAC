@@ -25,6 +25,8 @@ extraEnv: |
     value: 'false'
   - name: KC_PROXY
     value: passthrough
+  - name: PROXY_ADDRESS_FORWARDING
+    value: 'true'
   - name: KC_LOG_LEVEL
     value: debug
 

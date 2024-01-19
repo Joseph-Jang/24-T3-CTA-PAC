@@ -16,9 +16,6 @@ resources: {}
   #   cpu: "500m"
   #   memory: "1024Mi"
 
-## Overrides the default args for the Keycloak container
-args: ["-Dkeycloak.forceBackendUrlToFrontendUrl=false -Dkeycloak.profile.feature.upload_scripts=enabled -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=dir -Dkeycloak.migration.dir=/opt/jboss/kc-export -Dkeycloak.migration.strategy=IGNORE_EXISTING -Dkeycloak.migration.usersExportStrategy=DIFFERNET_FILES -Dkeycloak.migration.usersPerFile=100"]
-
 contextPath: identity/connect/auth
 
 # Liveness probe configuration
@@ -46,23 +43,10 @@ startupProbe: |
   timeoutSeconds: 1
   failureThreshold: 60
   periodSeconds: 5  
-  
-# Startup scripts to run before Keycloak starts up
-startupScripts:
-  # WildFly CLI script for configuring the node-identifier
-  keycloak.cli: |
-    {{- .Files.Get "scripts/keycloak.cli" }}
-  contextPath.cli: |
-    embed-server --server-config=standalone-ha.xml --std-out=echo
-    batch
-    {{- if ne .Values.contextPath "auth" }}
-    /subsystem=keycloak-server/:write-attribute(name=web-context,value={{ if eq .Values.contextPath "" }}/{{ else }}{{ .Values.contextPath }}{{ end }})
-    {{- if eq .Values.contextPath "" }}
-    /subsystem=undertow/server=default-server/host=default-host:write-attribute(name=default-web-module,value=keycloak-server.war)
-    {{- end }}
-    {{- end }}
-    run-batch
-    stop-embedded-server
+
+extraEnv: |
+  - name: KC_HTTP_RELATIVE_PATH
+    value: /identity/connect 
 
 pgchecker:
   image:

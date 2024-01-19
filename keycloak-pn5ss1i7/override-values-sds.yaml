@@ -27,6 +27,8 @@ extraEnv: |
     value: 'false'
   - name: KC_METRICS_ENABLED
     value: 'true'
+  - name: KEYCLOAK_STATISTICS
+    value: all
 
 contextPath: identity/connect/auth
 

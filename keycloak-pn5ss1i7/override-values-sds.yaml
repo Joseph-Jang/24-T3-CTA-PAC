@@ -23,6 +23,8 @@ extraEnv: |
     value: keycloak
   - name: KC_HOSTNAME_STRICT_HTTPS
     value: 'false'
+  - name: KC_PROXY
+    value: passthrough
   - name: KC_LOG_LEVEL
     value: debug
 

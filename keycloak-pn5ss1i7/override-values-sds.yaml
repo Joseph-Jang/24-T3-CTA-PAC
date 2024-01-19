@@ -22,7 +22,9 @@ extraEnv: |
   - name: KEYCLOAK_PASSWORD
     value: keycloak
   - name: KC_PROXY
-    value: passthrough    
+    value: passthrough  
+  - name: KC_HOSTNAME_STRICT_HTTPS
+    value: 'false'
 
 pgchecker:
   image:

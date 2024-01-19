@@ -8,9 +8,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - http:
+  - host: t3-keycloak.gitopsconsole.com
+    http:
       paths:
-      - path: /identity/connect
+      - path: 
         pathType: Prefix
         backend: 
           service: 

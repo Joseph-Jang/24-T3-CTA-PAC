@@ -21,6 +21,8 @@ extraEnv: |
     value: keycloak
   - name: KEYCLOAK_PASSWORD
     value: keycloak
+  - name: KC_HOSTNAME_STRICT_HTTPS
+    value: false
   - name: KC_LOG_LEVEL
     value: debug
 

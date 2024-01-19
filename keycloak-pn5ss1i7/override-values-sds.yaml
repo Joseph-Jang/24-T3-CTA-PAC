@@ -41,15 +41,15 @@ pgchecker:
     repository: docker.io/busybox
     # Image tag for the pgchecker image
     tag: 1.32
-
-## Init containers parameters:
-## volumePermissions: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
-##
-volumePermissions:
-  ## @param volumePermissions.enabled Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)
-  ##
-  enabled: true
   
 postgresql:
   global:
     storageClass: "nfs-retain-app"
+
+  ## Init containers parameters:
+  ## volumePermissions: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
+  ##
+  volumePermissions:
+    ## @param volumePermissions.enabled Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)
+    ##
+    enabled: true    

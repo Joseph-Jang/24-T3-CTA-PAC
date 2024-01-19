@@ -21,8 +21,8 @@ extraEnv: |
     value: keycloak
   - name: KEYCLOAK_PASSWORD
     value: keycloak
-
-args: ["-Dkeycloak.forceBackendUrlToFrontendUrl=false -Dkeycloak.profile.feature.upload_scripts=enabled -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=dir -Dkeycloak.migration.dir=/opt/jboss/kc-export -Dkeycloak.migration.strategy=IGNORE_EXISTING -Dkeycloak.migration.usersExportStrategy=DIFFERENT_FILES -Dkeycloak.migration.usersPerFile=100"]
+  - name: KC_LOG_LEVEL
+    value: debug
 
 contextPath: identity/connect/auth
 

@@ -45,6 +45,8 @@ startupProbe: |
   periodSeconds: 5  
 
 extraEnv: |
+  - name: KC_HOSTNAME_PATH
+    value: /identity/connect 
   - name: KC_HTTP_RELATIVE_PATH
     value: /identity/connect 
 

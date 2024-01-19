@@ -45,6 +45,7 @@ pgchecker:
 postgresql:
   ## @param fullnameOverride String to fully override common.names.fullname template
   fullnameOverride: keycloak-postgresql
+  
   global:
     storageClass: "nfs-retain-app"
 

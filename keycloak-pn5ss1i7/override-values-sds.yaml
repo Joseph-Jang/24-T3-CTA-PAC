@@ -18,6 +18,23 @@ resources: {}
 
 contextPath: identity/connect/auth
 
+# Startup scripts to run before Keycloak starts up
+startupScripts:
+  # WildFly CLI script for configuring the node-identifier
+  keycloak.cli: |
+    {{- .Files.Get "scripts/keycloak.cli" }}
+  contextPath.cli: |
+    embed-server --server-config=standalone-ha.xml --std-out=echo
+    batch
+    {{- if ne .Values.contextPath "auth" }}
+    /subsystem=keycloak-server/:write-attribute(name=web-context,value={{ if eq .Values.contextPath "" }}/{{ else }}{{ .Values.contextPath }}{{ end }})
+    {{- if eq .Values.contextPath "" }}
+    /subsystem=undertow/server=default-server/host=default-host:write-attribute(name=default-web-module,value=keycloak-server.war)
+    {{- end }}
+    {{- end }}
+    run-batch
+    stop-embedded-server
+
 # Liveness probe configuration
 livenessProbe: |
   httpGet:
@@ -43,12 +60,6 @@ startupProbe: |
   timeoutSeconds: 1
   failureThreshold: 60
   periodSeconds: 5  
-
-extraEnv: |
-  - name: KC_HOSTNAME_PATH
-    value: /identity/connect 
-  - name: KC_HTTP_RELATIVE_PATH
-    value: /identity/connect 
 
 pgchecker:
   image:

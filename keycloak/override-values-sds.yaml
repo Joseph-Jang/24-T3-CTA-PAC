@@ -25,6 +25,8 @@ extraEnv: |
     value: passthrough  
   - name: KC_HOSTNAME_STRICT_HTTPS
     value: 'false'
+  - name: KC_METRICS_ENABLED
+    value: 'true'
 
 contextPath: identity/connect/auth
 

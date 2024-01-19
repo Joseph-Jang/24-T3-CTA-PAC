@@ -16,6 +16,9 @@ resources: {}
   #   cpu: "500m"
   #   memory: "1024Mi"
 
+## Overrides the default args for the Keycloak container
+args: ["-Dkeycloak.forceBackendUrlToFrontendUrl=false -Dkeycloak.profile.feature.upload_scripts=enabled -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=dir -Dkeycloak.migration.dir=/opt/jboss/kc-export -Dkeycloak.migration.strategy=IGNORE_EXISTING -Dkeycloak.migration.usersExportStrategy=DIFFERNET_FILES -Dkeycloak.migration.usersPerFile=100"]
+
 contextPath: identity/connect/auth
 
 # Liveness probe configuration

@@ -22,6 +22,8 @@ extraEnv: |
   - name: KEYCLOAK_PASSWORD
     value: keycloak
 
+args: ["-Dkeycloak.forceBackendUrlToFrontendUrl=false"]
+
 contextPath: identity/connect/auth
 
 # Startup scripts to run before Keycloak starts up

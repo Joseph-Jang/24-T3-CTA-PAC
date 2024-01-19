@@ -37,6 +37,8 @@ postgresql:
   
   global:
     storageClass: "nfs-retain-app"
+    postgresql:
+      postgresqlPostgresPassword: keycloak
 
   ## Init containers parameters:
   ## volumePermissions: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup

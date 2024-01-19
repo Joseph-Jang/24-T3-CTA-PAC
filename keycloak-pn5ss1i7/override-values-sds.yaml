@@ -21,6 +21,8 @@ extraEnv: |
     value: keycloak
   - name: KEYCLOAK_PASSWORD
     value: keycloak
+  - name: KC_PROXY
+    value: passthrough    
 
 pgchecker:
   image:

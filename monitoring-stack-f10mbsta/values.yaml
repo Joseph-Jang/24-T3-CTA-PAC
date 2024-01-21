@@ -6,7 +6,7 @@ metrics-server:
 
 prometheus:
   # Scrape Configs
-  extraScrapeConfigs:
+  extraScrapeConfigs: |
     # scrape keycloak metrics
     - job_name: keycloak
       static_configs:

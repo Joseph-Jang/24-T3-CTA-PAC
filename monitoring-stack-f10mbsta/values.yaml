@@ -5,6 +5,14 @@ metrics-server:
   fullnameOverride: "metrics-server"
 
 prometheus:
+  # Scrape Configs
+  extraScrapeConfigs:
+    # scrape keycloak metrics
+    - job_name: keycloak
+      static_configs:
+        - targets:
+          - keycloak-http.default.svc.cluster.local:9990
+          
   server:
     fullnameOverride: prometheus-server
     image: 

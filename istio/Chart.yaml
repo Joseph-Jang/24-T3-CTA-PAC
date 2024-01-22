@@ -13,7 +13,7 @@ dependencies:
 - name: base
   version: 1.20.2
   repository: "file://.charts/base"
-- name: istio-discovery
+- name: istiod
   version: 1.20.2
   repository: "file://.charts/istio-discovery"
 - name: istio-egress

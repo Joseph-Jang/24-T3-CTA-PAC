@@ -22,7 +22,7 @@ extraEnv: |
   - name: KEYCLOAK_PASSWORD
     value: keycloak
   - name: KC_PROXY
-    value: passthrough  
+    value: passthrough
   - name: KC_HOSTNAME_STRICT_HTTPS
     value: 'false'
   - name: KC_METRICS_ENABLED
@@ -73,18 +73,18 @@ startupProbe: |
   timeoutSeconds: 1
   failureThreshold: 60
   periodSeconds: 5
-    
+
 pgchecker:
   image:
     # Docker image used to check Postgresql readiness at startup
     repository: docker.io/busybox
     # Image tag for the pgchecker image
     tag: 1.32
-  
+
 postgresql:
   ## @param fullnameOverride String to fully override common.names.fullname template
   fullnameOverride: keycloak-postgresql
-  
+
   global:
     storageClass: "nfs-retain-app"
     postgresql:
@@ -96,4 +96,26 @@ postgresql:
   volumePermissions:
     ## @param volumePermissions.enabled Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)
     ##
-    enabled: true    
+    enabled: true
+
+secret:
+  files:
+    keycloak-metrics-spi-4.0.0.jar: |
+      {{- .Files.Get "files/keycloak-metrics-spi-4.0.0.jar" | b64enc }}
+
+# Add additional volumes, e. g. for custom themes
+extraVolumes: |
+  - name: metrics-plugin
+    secret:
+      secretName: keycloak-metrics-plugin
+      items:
+      {{- range $key, $value := .Values.secret.files }}
+      - key: {{ $key }}
+        path: {{ $key }}
+      {{- end }}
+
+# Add additional volumes mounts, e. g. for custom themes
+extraVolumeMounts: |
+  - name: metrics-plugin
+    mountPath: /opt/keycloak/providers/keycloak-metrics-spi-4.0.0.jar
+    subPath: keycloak-metrics-spi-4.0.0.jar

@@ -14,6 +14,6 @@ spec:
         prefix: /opensearch
     route:
     - destination:
-        host: {{- .Values.opensearch-dashboards.fullnameOverride | trunc 63 | trimSuffix "-" }}
+        host: "{{- .Values.opensearch.fullnameOverride | trunc 63 | trimSuffix "-" }}-dashboards"
         port:
           number: {{ .Values.opensearch-dashboards.service.port }}

@@ -122,6 +122,15 @@ fluent-bit:
           rule "start_date" "/(\[\d+\/\d+\/\d+)(.*)/" "cont"
           rule "cont"       "/^\s+at.*/"              "cont"
 
+fluentd:
+  fullnameOverride: "fluentd"
+
+  image:
+    repository: "fluent/fluentd-kubernetes-daemonset"
+    tag: ""
+
+  resources: {}
+
 opensearch:
   singleNode: true
 

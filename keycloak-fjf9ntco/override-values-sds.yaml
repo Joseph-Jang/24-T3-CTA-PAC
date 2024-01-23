@@ -97,25 +97,3 @@ postgresql:
     ## @param volumePermissions.enabled Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)
     ##
     enabled: true
-
-secret:
-  files:
-    keycloak-metrics-spi-4.0.0.jar: |
-      {{- .Files.Get "files/keycloak-metrics-spi-4.0.0.jar" | b64enc }}
-
-# Add additional volumes, e. g. for custom themes
-extraVolumes: |
-  - name: metrics-plugin
-    secret:
-      secretName: keycloak-metrics-plugin
-      items:
-      {{- range $key, $value := .Values.secret.files }}
-      - key: {{ $key }}
-        path: {{ $key }}
-      {{- end }}
-
-# Add additional volumes mounts, e. g. for custom themes
-extraVolumeMounts: |
-  - name: metrics-plugin
-    mountPath: /opt/keycloak/providers/keycloak-metrics-spi-4.0.0.jar
-    subPath: keycloak-metrics-spi-4.0.0.jar

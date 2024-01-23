@@ -9,9 +9,9 @@ dependencies:
   - name: prometheus
     version: 25.8.2
     repository: "file://./charts/prometheus"
-  - name: prometheus-operator-crds
-    version: 8.0.1
-    repository: "file://./charts/prometheus-operator-crds"
+  - name: metrics-server
+    version: 3.11.0
+    repository: "file://./charts/metrics-server"
   - name: grafana
     version: 7.2.1
     repository: "file://./charts/grafana"

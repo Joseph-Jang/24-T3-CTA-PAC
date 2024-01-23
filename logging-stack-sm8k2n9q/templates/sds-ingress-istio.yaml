@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{- .Values.opensearch-dashboards.fullnameOverride | trunc 63 | trimSuffix "-" }}
+  name: {{- .Values.opensearch.fullnameOverride | trunc 63 | trimSuffix "-" }}
   namespace: {{ .Release.Namespace }}
 spec:
   hosts:

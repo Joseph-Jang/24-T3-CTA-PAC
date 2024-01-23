@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: "{{ .Values.dashboards.fullnameOverride }}"
+  name: "{{ .Values.opensearch.fullnameOverride }}"
   namespace: {{ .Release.Namespace }}
 spec:
   hosts:
@@ -14,6 +14,6 @@ spec:
         prefix: /opensearch
     route:
     - destination:
-        host: "{{ .Values.dashboards.fullnameOverride }}"
+        host: "{{ .Values.ingress.istio.host }}"
         port:
-          number: {{ .Values.dashboards.service.port }}
+          number: {{ .Values.ingress.istio.port }}

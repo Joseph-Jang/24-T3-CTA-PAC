@@ -212,7 +212,7 @@ opensearch:
 
   fullnameOverride: "opensearch"
 
-dashboards:
+opensearch-dashboards:
   opensearchHosts: "https://opensearch-cluster-master:9200"
   replicaCount: 1
 
@@ -232,4 +232,9 @@ dashboards:
       memory: "512M"
 
   service:
+    port: 5601
+
+ingress:
+  istio:
+    host: "opensearch-dashboards"
     port: 5601

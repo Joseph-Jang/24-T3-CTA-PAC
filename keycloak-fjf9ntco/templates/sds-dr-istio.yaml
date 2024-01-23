@@ -4,7 +4,7 @@ metadata:
   name: {{ include "keycloak.fullname" . }}
   namespace: {{ .Release.Namespace }}
 spec:
-  host: "{{ include "keycloak.fullname" . }}-http.{{ .Release.Namespace }}.svc.cluster.local
+  host: "{{ include "keycloak.fullname" . }}-http.{{ .Release.Namespace }}.svc.cluster.local"
   trafficPolicy:
     tls:
       mode: SIMPLE

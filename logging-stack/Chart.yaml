@@ -15,6 +15,6 @@ dependencies:
   - name: opensearch
     version: 2.17.2
     repository: "file://./charts/opensearch"
-  - name: opensearch-dashboards
+  - name: dashboards
     version: 2.15.1
     repository: "file://./charts/opensearch-dashboards"

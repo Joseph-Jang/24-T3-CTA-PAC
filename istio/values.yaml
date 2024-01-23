@@ -170,21 +170,9 @@ istio-ingress:
         protocol: TCP
       - name: https
         port: 443
-        targetPort: 8443
+        targetPort: 8080
         nodePort: 32197
         protocol: TCP
-      - name: tcp-istiod
-        port: 15012
-        targetPort: 15012
-        protocol: TCP
-      - name: tls
-        port: 15443
-        targetPort: 15442
-        protocol: TCP
-      - name: tcp
-        port: 18190
-        targetPort: 18190
-        nodePort: 31400
       resources:
         requests:
           cpu: 10m
@@ -198,6 +186,14 @@ istio-ingress:
       autoscaleEnabled: true
       autoscaleMin: 1  # 1 pod per node
       autoscaleMax: 1  # 1 pod per node
+      serviceAnnotations:
+        service.beta.kubernetes.io/aws-load-balancer-type: nlb
+        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+        service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+        service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: preserve_client_ip.enabled=true
+        service.beta.kubernetes.io/aws-load-balancer-eip-allocations: <<eip_id>>
+        service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <<sslcert_arn>>
       secretVolumes:
       - name: ingressgateway-certs
         secretName: istio-ingressgateway-certs

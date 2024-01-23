@@ -237,6 +237,19 @@ opensearch:
 
   # such as opensearch.yml and log4j2.properties
   config:
+    config.yml: |
+      _meta:
+        type: "config"
+        config_version: 2
+
+      config:
+        dynamic:
+          authc:
+            basic_internal_auth_domain:
+              http_authenticator:
+                type: basic
+                challenge: false
+
     opensearch.yml: |
       cluster.name: opensearch-cluster
       compatibility.override_main_response_version: true

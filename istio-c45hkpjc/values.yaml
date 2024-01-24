@@ -173,6 +173,11 @@ istio-ingress:
         targetPort: 8443
         nodePort: 32197
         protocol: TCP
+      - name: tls
+        port: 15443
+        targetPort: 15442
+        protocol: TCP
+        nodePort: 32287
       resources:
         requests:
           cpu: 10m

@@ -332,6 +332,25 @@ opensearch-dashboards:
   service:
     port: 5601
 
+  config:
+    # Default OpenSearch Dashboards configuration from docker image of Dashboards
+
+    opensearch_dashboards.yml: |
+      server.host: '0.0.0.0'
+      server.basePath: "/opensearch"
+      server.rewriteBasePath: true
+
+      opensearch.hosts: ["https://opensearch-cluster-master:9200"]
+      opensearch.ssl.verificationMode: none
+      opensearch.username: admin
+      opensearch.password: admin
+      opensearch.requestHeadersWhitelist: [authorization, securitytenant]
+
+      opensearch_security.multitenancy.enabled: true
+      opensearch_security.multitenancy.tenants.preferred: [Private, Global]
+      opensearch_security.readonly_mode.roles: [kibana_read_only]
+      opensearch_security.cookie.secure: false
+
 ingress:
   istio:
     host: "opensearch-dashboards"

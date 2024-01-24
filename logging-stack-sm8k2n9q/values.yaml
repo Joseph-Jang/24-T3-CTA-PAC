@@ -16,7 +16,7 @@ fluent-bit:
           if record["kubernetes"] == nil then
               return 0, 0, 0
           end
-          if (record["kubernetes"]["labels"]["app"] ~= nil and type(record["kubernete"]["labels"]["app"]) ~= "table") then
+          if (record["kubernetes"]["labels"]["app"] ~= nil and type(record["kubernetes"]["labels"]["app"]) ~= "table") then
               record["kubernetes"]["labels"]["app"] = {appName = record["kubernetes"]["labels"]["app"]}
           end
           dedot_keys(record["kubernetes"]["annotations"])

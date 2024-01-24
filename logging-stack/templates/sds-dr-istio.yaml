@@ -7,4 +7,4 @@ spec:
   host: "{{ .Values.ingress.istio.host }}"
   trafficPolicy:
     tls:
-      mode: DISABLE
+      mode: SIMPLE

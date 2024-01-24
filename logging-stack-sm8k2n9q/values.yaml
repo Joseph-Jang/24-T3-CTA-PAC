@@ -332,6 +332,10 @@ opensearch-dashboards:
   service:
     port: 5601
 
+  config:
+    opensearch_dashboards.yml: |
+      opensearch.ssl.verificationMode: none
+
 ingress:
   istio:
     host: "opensearch-dashboards"

@@ -146,15 +146,15 @@ opensearch:
     # override image tag, which is .Chart.AppVersion by default
     tag: "2.11.1"
 
-  opensearchJavaOpts: "-Xmx512M -Xms512M"
+  opensearchJavaOpts: "-Xmx1G -Xms1G"
 
   resources:
     requests:
       cpu: "1000m"
-      memory: "1Gi"
+      memory: "2Gi"
     limits:
       cpu: "1000m"
-      memory: "1Gi"
+      memory: "2Gi"
 
   persistence:
     storageClass: "nfs-retain-app"

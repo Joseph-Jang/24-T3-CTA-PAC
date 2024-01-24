@@ -21,3 +21,9 @@ spec:
       protocol: TCP
     hosts:
     - "*"
+  - port:
+      name: https
+      number: 443
+      protocol: TCP
+    hosts:
+    - "*"

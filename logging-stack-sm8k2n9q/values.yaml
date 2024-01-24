@@ -332,6 +332,17 @@ opensearch-dashboards:
   service:
     port: 5601
 
+  config:
+    # Default OpenSearch Dashboards configuration from docker image of Dashboards
+
+    opensearch_dashboards.yml: |
+      server:
+        basePath: "/opensearch"
+        rewriteBasePath: true
+
+      opensearch:
+        hosts: ["http://opensearch-cluster-master:9200"]
+
 ingress:
   istio:
     host: "opensearch-dashboards"

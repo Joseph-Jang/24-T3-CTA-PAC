@@ -99,32 +99,13 @@ fluentd:
   ## Fluentd configurations:
   fileConfigs:
     01_sources.conf: |-
-      ## logs from podman
+      ## logs from fluentbit
       <source>
-        @type tail
-        @id in_tail_container_logs
+        @type forward
+        @id container_logs
         @label @KUBERNETES
-        path /var/log/containers/*.log
-        pos_file /var/log/fluentd-containers.log.pos
-        tag kubernetes.*
-        read_from_head true
-        <parse>
-          @type multi_format
-          <pattern>
-            format json
-            time_key time
-            time_type string
-            time_format "%Y-%m-%dT%H:%M:%S.%NZ"
-            keep_time_key false
-          </pattern>
-          <pattern>
-            format regexp
-            expression /^(?<time>.+) (?<stream>stdout|stderr)( (.))? (?<log>.*)$/
-            time_format '%Y-%m-%dT%H:%M:%S.%NZ'
-            keep_time_key false
-          </pattern>
-        </parse>
-        emit_unmatched_lines true
+        bind 0.0.0.0
+        port 24224
       </source>
 
     02_filters.conf: |-

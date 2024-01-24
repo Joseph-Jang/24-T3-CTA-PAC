@@ -69,6 +69,15 @@ fluent-bit:
           Write_Operation upsert
           Trace_Error On
 
+    ## https://docs.fluentbit.io/manual/pipeline/parsers
+    customParsers: |
+      [PARSER]
+          Name docker_no_time
+          Format json
+          Time_Keep Off
+          Time_Key time
+          Time_Format %Y-%m-%dT%H:%M:%S.%L
+
     # This allows adding more files with arbitary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.
     extraFiles:

@@ -170,7 +170,7 @@ istio-ingress:
         protocol: TCP
       - name: https
         port: 443
-        targetPort: 8080
+        targetPort: 8443
         nodePort: 32197
         protocol: TCP
       resources:

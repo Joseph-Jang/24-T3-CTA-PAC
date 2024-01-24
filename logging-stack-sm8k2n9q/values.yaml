@@ -119,8 +119,8 @@ fluent-bit:
           name          multiline-regex
           type          regex
           flush_timeout 1000
-          rule "start_date" "/(\[\d+\/\d+\/\d+)(.*)/" "cont"
-          rule "cont"       "/^\s+at.*/"              "cont"
+          rule "start_state" "/(\[\d+\/\d+\/\d+)(.*)/" "cont"
+          rule "cont"        "/^\s+at.*/"              "cont"
 
 fluentd:
   fullnameOverride: "fluentd"
@@ -226,6 +226,9 @@ fluentd:
           path ""
           user admin
           password admin
+          scheme https
+          ssl_verify false
+          logstash_format true
         </match>
       </label>
 

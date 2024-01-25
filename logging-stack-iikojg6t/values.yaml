@@ -68,7 +68,7 @@ fluent-bit:
           Trace_Error On
 
     ## https://docs.fluentbit.io/manual/pipeline/parsers
-    customParsers: {}
+    customParsers: ""
 
     # This allows adding more files with arbitary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.

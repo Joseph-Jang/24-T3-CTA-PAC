@@ -51,7 +51,7 @@ fluent-bit:
       [INPUT]
           Name tail
           Path /var/log/containers/istio-ingress*.log
-          multiline.parser docker, cri, multiline-regex
+          multiline.parser docker, cri, docker
           Tag istio.*
           Mem_Buf_Limit 5MB
           Skip_Long_Lines On          
@@ -60,19 +60,11 @@ fluent-bit:
     filters: |
       [FILTER]
           Name kubernetes
-          Match kube.*
+          Match *
           Merge_Log On
           Keep_Log Off
           K8S-Logging.Parser On
-          K8S-Logging.Exclude On
-
-      [FILTER]
-          Name kubernetes
-          Match test.*
-          Merge_Log On
-          Keep_Log Off
-          K8S-Logging.Parser On
-          K8S-Logging.Exclude On          
+          K8S-Logging.Exclude On       
 
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
@@ -96,7 +88,7 @@ fluent-bit:
     ## https://docs.fluentbit.io/manual/pipeline/parsers
     customParsers: |
       [PARSER]
-          Name docker_no_time
+          Name docker
           Format json
           Time_Keep Off
           Time_Key time

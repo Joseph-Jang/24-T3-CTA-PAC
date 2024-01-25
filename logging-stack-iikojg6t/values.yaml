@@ -21,6 +21,8 @@ fluent-bit:
           HTTP_Listen 0.0.0.0
           HTTP_Port {{ .Values.metricsPort }}
           Health_Check On
+          Parsers_File /fluent-bit/etc/conf/parsers_multiline.conf
+          Parsers_File /fluent-bit/etc/conf/custom_parsers.conf
 
     ## https://docs.fluentbit.io/manual/pipeline/inputs
     inputs: |
@@ -38,15 +40,31 @@ fluent-bit:
           Systemd_Filter _SYSTEMD_UNIT=kubelet.service
           Read_From_Tail On
 
+      [INPUT]
+          Name tail
+          Path /var/log/containers/test-pod*.log
+          multiline.parser docker, cri, multiline-regex
+          Tag test.*
+          Mem_Buf_Limit 5MB
+          Skip_Long_Lines On        
+
+      [INPUT]
+          Name tail
+          Path /var/log/containers/istio-ingress*.log
+          multiline.parser docker, cri, docker
+          Tag istio.*
+          Mem_Buf_Limit 5MB
+          Skip_Long_Lines On          
+
     ## https://docs.fluentbit.io/manual/pipeline/filters
     filters: |
       [FILTER]
           Name kubernetes
-          Match kube.*
+          Match *
           Merge_Log On
           Keep_Log Off
           K8S-Logging.Parser On
-          K8S-Logging.Exclude On
+          K8S-Logging.Exclude On       
 
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
@@ -68,11 +86,24 @@ fluent-bit:
           Trace_Error On
 
     ## https://docs.fluentbit.io/manual/pipeline/parsers
-    customParsers: ""
+    customParsers: |
+      [PARSER]
+          Name docker
+          Format json
+          Time_Keep Off
+          Time_Key time
+          Time_Format %Y-%m-%dT%H:%M:%S.%L
 
     # This allows adding more files with arbitary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.
-    extraFiles: {}
+    extraFiles:
+      parsers_multiline.conf: |
+        [MULTILINE_PARSER]
+          name          multiline-regex
+          type          regex
+          flush_timeout 1000
+          rule "start_state" "/(\d+):\s(.+)/" "cont"
+          rule "cont"        "/^\s+at.*/"     "cont"
 
 opensearch:
   singleNode: true

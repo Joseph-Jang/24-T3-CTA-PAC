@@ -12,20 +12,24 @@ prometheus:
       static_configs:
         - targets:
           - keycloak-http.default.svc.cluster.local:9990
-          
+    - job_name: fluentbit
+      static_configs:
+        - targets:
+          - fluent-bit.logging.svc.cluster.local:2020/api/v1/metrics/prometheus
+
   server:
     fullnameOverride: prometheus-server
-    image: 
+    image:
       repository: quay.io/prometheus/prometheus
       tag: v2.48.1
-  
+
     global:
       ## How frequently to scrape targets by default
       scrape_interval: 10s
 
     persistentVolume:
       ## Prometheus server data Persistent Volume Storage Class
-      storageClass: "nfs-retain-app"  
+      storageClass: "nfs-retain-app"
 
       ## Prometheus server data Persistent Volume size
       size: 8Gi
@@ -37,7 +41,7 @@ prometheus:
       # requests:
       #   cpu: 500m
       #   memory: 512Mi
-    
+
     ## Prometheus data retention period (default if not specified is 15 days)
     retention: "7d"
 
@@ -81,19 +85,19 @@ prometheus-operator-crds:
 
 grafana:
   fullnameOverride: grafana
-  image: 
+  image:
     # -- The Docker registry
     registry: docker.io
     # -- Docker image repository
     repository: grafana/grafana
     # Overrides the Grafana image tag whose default is the chart appVersion
   tag: 10.2.3
-  
+
   ## Expose the grafana service to be accessed from outside the cluster (LoadBalancer service).
   ## or access it from within the cluster (ClusterIP service). Set the service type and the port to serve it.
   service:
     port: 80
-  
+
   testFramework:
     enabled: true
     image:
@@ -115,7 +119,7 @@ grafana:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-  
+
   ## Enable persistence using Persistent Volume Claims
   persistence:
     type: pvc
@@ -141,7 +145,7 @@ grafana:
     # requests:
     #   cpu: 100m
     #   memory: 128Mi
-  
+
   # Administrator credentials when not using an existing secret
   adminUser: admin
   adminPassword: admin
@@ -163,7 +167,7 @@ grafana:
         jsonData:
           timeInterval: 5s
         editable: true
-  
+
   # Sidecars that collect the configmaps with specified label and stores the include files them into the respective folders
   sidecar:
     image:
@@ -179,5 +183,5 @@ grafana:
       serve_from_sub_path: true
 
   ## Pass the plugins you want installed as a list.
-  plugins: 
+  plugins:
     - grafana-piechart-panel

@@ -42,7 +42,7 @@ fluent-bit:
       [INPUT]
           Name tail
           Path /var/log/containers/test-pod*.log
-          multiline.parser docker, cri, multiline-regex
+          multiline.parser docker, cri
           Tag test.*
           Mem_Buf_Limit 5MB
           Skip_Long_Lines On          
@@ -89,14 +89,7 @@ fluent-bit:
 
     # This allows adding more files with arbitary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.
-    extraFiles:
-      parsers_multiline.conf: |
-        [MULTILINE_PARSER]
-          name          multiline-regex
-          type          regex
-          flush_timeout 1000
-          rule "start_state" "/^\d+:\s[A-Za-z]{3}\s[A-Za-z]{3}\s\d{1,2}\s\d{2}:\d{2}:\d{2}\sUTC/" "cont"
-          rule "cont"        "/^\s+at.*/"                                                         "cont"
+    extraFiles: ""
 
 opensearch:
   singleNode: true

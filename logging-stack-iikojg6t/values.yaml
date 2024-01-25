@@ -42,7 +42,6 @@ fluent-bit:
       [INPUT]
           Name tail
           Path /var/log/containers/test-pod*.log
-          multiline.parser docker, cri
           Tag test.*
           Mem_Buf_Limit 5MB
           Skip_Long_Lines On          

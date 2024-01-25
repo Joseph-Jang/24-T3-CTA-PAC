@@ -22,6 +22,7 @@ fluent-bit:
           HTTP_Port {{ .Values.metricsPort }}
           Health_Check On
           Parsers_File /fluent-bit/etc/conf/parsers_multiline.conf
+          Parsers_File /fluent-bit/etc/conf/custom_parsers.conf
 
     ## https://docs.fluentbit.io/manual/pipeline/inputs
     inputs: |
@@ -46,6 +47,14 @@ fluent-bit:
           Tag test.*
           Mem_Buf_Limit 5MB
           Skip_Long_Lines On        
+
+      [INPUT]
+          Name tail
+          Path /var/log/containers/istio-ingress*.log
+          multiline.parser docker, cri, multiline-regex
+          Tag istio.*
+          Mem_Buf_Limit 5MB
+          Skip_Long_Lines On          
 
     ## https://docs.fluentbit.io/manual/pipeline/filters
     filters: |
@@ -85,7 +94,13 @@ fluent-bit:
           Trace_Error On
 
     ## https://docs.fluentbit.io/manual/pipeline/parsers
-    customParsers: ""
+    customParsers: |
+      [PARSER]
+          Name docker_no_time
+          Format json
+          Time_Keep Off
+          Time_Key time
+          Time_Format %Y-%m-%dT%H:%M:%S.%L
 
     # This allows adding more files with arbitary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.

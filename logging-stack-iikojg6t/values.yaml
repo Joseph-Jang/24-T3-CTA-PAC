@@ -89,7 +89,7 @@ fluent-bit:
 
     # This allows adding more files with arbitary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.
-    extraFiles: ""
+    extraFiles: {}
 
 opensearch:
   singleNode: true

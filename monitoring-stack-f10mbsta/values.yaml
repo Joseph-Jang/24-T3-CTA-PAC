@@ -7,11 +7,7 @@ metrics-server:
 prometheus:
   # Scrape Configs
   extraScrapeConfigs: |
-    # scrape keycloak metrics
-    - job_name: keycloak
-      static_configs:
-        - targets:
-          - keycloak-http.default.svc.cluster.local:9990
+    # scrape fluent-bit metrics
     - job_name: fluentbit
       static_configs:
         - targets:

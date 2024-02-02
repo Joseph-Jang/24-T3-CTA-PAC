@@ -117,4 +117,4 @@ server:
     metrics:
       enabled: true
       port: 9090
-  web_root: ""
+  web_root: "/kiali"

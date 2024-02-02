@@ -8,8 +8,6 @@ server:
     ## How frequently to scrape targets by default
     scrape_interval: 10s
   persistentVolume:
-    ## Prometheus server data Persistent Volume Storage Class
-    storageClass: "nfs-retain-app"  
     ## Prometheus server data Persistent Volume size
     size: 8Gi
   resources: {}

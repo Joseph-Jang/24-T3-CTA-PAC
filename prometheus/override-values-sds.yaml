@@ -36,7 +36,7 @@ kube-state-metrics:
 ## prometheus-node-exporter sub-chart configurable values
 prometheus-node-exporter:
   ## If false, node-exporter will not be installed
-  enabled: true
+  enabled: false
   image:
     registry: quay.io
     repository: prometheus/node-exporter

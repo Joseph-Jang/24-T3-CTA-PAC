@@ -12,6 +12,8 @@ spec:
   - match:
     - uri:
         prefix: /rollouts
+    rewrite:
+      uri: /
     route:
     - destination:
         host: "{{ include "argo-rollouts.fullname" . }}-dashboard"

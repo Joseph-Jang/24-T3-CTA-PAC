@@ -42,7 +42,7 @@ configs:
     # -- Bcrypt hashed admin password
     ## Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
     ## `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
-    argocdServerAdminPassword: "admin"
+    argocdServerAdminPassword: "$2a$10$bBsPy2fy2dbVFGp/SxJmoe.8d./hY8NyRvNrDJdvSp20k4NO21aJO"
 
 ## Application controller
 controller:

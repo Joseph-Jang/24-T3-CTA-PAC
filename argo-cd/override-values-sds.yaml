@@ -22,7 +22,7 @@ configs:
   ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
   cm:
     resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
-      jqPathExpressions: 
+      jqPathExpressions:
       - '.webhooks[]?.clientConfig.caBundle'
 
   # Argo CD configuration parameters
@@ -34,7 +34,15 @@ configs:
     # -- Value for base href in index.html. Used if Argo CD is running behind reverse proxy under subpath different from /
     server.basehref: /argocd
     # -- Used if Argo CD is running behind reverse proxy under subpath different from /
-    server.rootpath: '/argocd'    
+    server.rootpath: '/argocd'
+
+  # Argo CD sensitive data
+  # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/#sensitive-data-and-sso-client-secrets
+  secret:
+    # -- Bcrypt hashed admin password
+    ## Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
+    ## `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
+    argocdServerAdminPassword: "admin"
 
 ## Application controller
 controller:
@@ -64,7 +72,7 @@ dex:
   metrics:
     # -- Deploy metrics service
     enabled: false
- 
+
   ## Dex image
   image:
     # -- Dex image repository

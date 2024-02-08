@@ -92,6 +92,8 @@ pgchecker:
     tag: 1.32
 
 postgresql:
+  enabled: false
+
   ## @param fullnameOverride String to fully override common.names.fullname template
   fullnameOverride: keycloak-postgresql
 

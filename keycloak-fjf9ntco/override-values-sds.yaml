@@ -17,6 +17,16 @@ resources: {}
   #   memory: "1024Mi"
 
 extraEnv: |
+  - name: DB_VENDOR
+    value: mariadb
+  - name: DB_ADDR
+    value: db-t3-cta-kr.cuk8nlvrmbrg.ap-northeast-2.rds.amazonaws.com
+  - name: DB_PORT
+    value: "3306"
+  - name: DB_USER
+    value: admin
+  - name: DB_PASSWORD
+    value: zmffkdnemdkzl
   - name: KEYCLOAK_USER
     value: keycloak
   - name: KEYCLOAK_PASSWORD

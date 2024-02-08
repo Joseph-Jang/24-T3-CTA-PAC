@@ -17,6 +17,16 @@ resources: {}
   #   memory: "1024Mi"
 
 extraEnv: |
+  - name: DB_VENDOR
+    value: mariadb
+  - name: DB_ADDR
+    value: <<mariadb_endpoint>>
+  - name: DB_PORT
+    value: "3306"
+  - name: DB_USER
+    value: admin
+  - name: DB_PASSWORD
+    value: <<mariadb_password>>
   - name: KEYCLOAK_USER
     value: keycloak
   - name: KEYCLOAK_PASSWORD

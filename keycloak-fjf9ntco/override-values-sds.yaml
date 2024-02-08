@@ -24,7 +24,7 @@ extraEnv: |
   - name: DB_PORT
     value: "3306"
   - name: DB_USER
-    value: admin
+    value: gitops
   - name: DB_PASSWORD
     value: zmffkdnemdkzl
   - name: KEYCLOAK_USER

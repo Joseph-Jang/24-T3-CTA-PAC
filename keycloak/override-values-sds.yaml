@@ -26,7 +26,7 @@ extraEnv: |
   - name: DB_USER
     value: admin
   - name: DB_PASSWORD
-    value: <<mariadb_password>>
+    value: password00!
   - name: KEYCLOAK_USER
     value: keycloak
   - name: KEYCLOAK_PASSWORD

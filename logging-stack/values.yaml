@@ -3,7 +3,7 @@ fluent-bit:
     repository: cr.fluentbit.io/fluent/fluent-bit
     # Overrides the image tag whose default is {{ .Chart.AppVersion }}
     # Set to "-" to not use the default value
-    tag: 2.2.1
+    tag: 3.0.4
     pullPolicy: IfNotPresent
 
   fullnameOverride: "fluent-bit"

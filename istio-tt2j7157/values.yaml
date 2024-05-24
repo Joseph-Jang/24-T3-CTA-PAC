@@ -186,7 +186,7 @@ istio-ingress:
       autoscaleMin: 1  # 1 pod per node
       autoscaleMax: 1  # 1 pod per node
       serviceAnnotations:
-        kubernetes.io/ingress.class: alb
+        service.beta.kubernetes.io/aws-load-balancer-type: alb
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/backend-protocol: HTTP
         alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:ap-northeast-2:948135709814:certificate/48116cd7-6317-4462-bffb-924a337a015a"

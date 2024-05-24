@@ -188,7 +188,8 @@ istio-ingress:
       serviceAnnotations:
         alb.ingress.kubernetes.io/scheme: "internet-facing"
         alb.ingress.kubernetes.io/target-type: "ip"
-        service.beta.kubernetes.io/aws-load-balancer-type: external
+        alb.ingress.kubernetes.io/backend-protocol: "HTTP"
+        service.beta.kubernetes.io/aws-load-balancer-type: "alb""
       secretVolumes:
       - name: ingressgateway-certs
         secretName: istio-ingressgateway-certs

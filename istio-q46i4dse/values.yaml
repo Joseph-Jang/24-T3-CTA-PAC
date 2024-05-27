@@ -157,7 +157,7 @@ istio-ingress:
       name: istio-ingressgateway
       labels:
         istio: ingressgateway
-      type: LoadBalancer
+      type: NodePort
       ports:
       - name: status-port
         port: 15021
@@ -185,14 +185,6 @@ istio-ingress:
       autoscaleEnabled: true
       autoscaleMin: 1  # 1 pod per node
       autoscaleMax: 1  # 1 pod per node
-      serviceAnnotations:
-        service.beta.kubernetes.io/aws-load-balancer-type: nlb
-        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
-        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-        service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
-        service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: preserve_client_ip.enabled=true
-        service.beta.kubernetes.io/aws-load-balancer-eip-allocations: eipalloc-0504229e934db381b,eipalloc-017224209b95f0dd2
-        service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-northeast-2:805127175383:certificate/cc8fe4d9-d28f-4ca8-97e4-3d4d38105b48
       secretVolumes:
       - name: ingressgateway-certs
         secretName: istio-ingressgateway-certs

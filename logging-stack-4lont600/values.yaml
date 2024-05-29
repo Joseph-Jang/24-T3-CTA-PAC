@@ -21,6 +21,7 @@ fluent-bit:
           HTTP_Listen 0.0.0.0
           HTTP_Port {{ .Values.metricsPort }}
           Health_Check On
+          Parsers_File /fluent-bit/etc/conf/parsers_multiline.conf
 
     ## https://docs.fluentbit.io/manual/pipeline/inputs
     inputs: |

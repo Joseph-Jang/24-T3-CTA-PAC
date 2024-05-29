@@ -42,7 +42,7 @@ fluent-bit:
     filters: |
       [FILTER]
           Name kubernetes
-          Match *
+          Match kube.*
           Merge_Log On
           Keep_Log Off
           K8S-Logging.Parser On
@@ -52,7 +52,7 @@ fluent-bit:
     outputs: |
       [OUTPUT]
           Name opensearch
-          Match *
+          Match kube.*
           Host opensearch-cluster-master
           Port 9200
           HTTP_User admin

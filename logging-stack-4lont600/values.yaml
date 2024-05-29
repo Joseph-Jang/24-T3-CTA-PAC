@@ -61,7 +61,7 @@ fluent-bit:
     outputs: |
       [OUTPUT]
           Name opensearch
-          Match kube.* test.*
+          Match *
           Host opensearch-cluster-master
           Port 9200
           HTTP_User admin

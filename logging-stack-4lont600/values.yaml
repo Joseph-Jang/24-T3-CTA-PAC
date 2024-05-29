@@ -21,7 +21,6 @@ fluent-bit:
           HTTP_Listen 0.0.0.0
           HTTP_Port {{ .Values.metricsPort }}
           Health_Check On
-          Parsers_File /fluent-bit/etc/conf/parsers_multiline.conf
 
     ## https://docs.fluentbit.io/manual/pipeline/inputs
     inputs: |
@@ -81,14 +80,7 @@ fluent-bit:
 
     # This allows adding more files with arbitary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.
-    extraFiles:
-      parsers_multiline.conf: |
-        [MULTILINE_PARSER]
-          name          multiline-regex
-          type          regex
-          flush_timeout 1000
-          rule "start_state" "/(\d+):\s(.+)/" "cont"
-          rule "cont"        "/^\s+at.*/"     "cont"
+    extraFiles: {}
 
 opensearch:
   singleNode: true

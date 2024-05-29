@@ -50,7 +50,7 @@ fluent-bit:
           Name tail
           Path /var/log/containers/istio-ingress*.log
           multiline.parser docker, cri
-          Tag istio.*
+          Tag kube.*
           Mem_Buf_Limit 5MB
           Skip_Long_Lines On             
 

@@ -1,3 +1,5 @@
+certificate_arn: {}
+
 global:
   hub: docker.io/istio
   tag: 1.20.2
@@ -154,7 +156,6 @@ istiod:
 istio-ingress:
   gateways:
     istio-ingressgateway:
-      certificate_arn: {}
       name: istio-ingressgateway
       labels:
         istio: ingressgateway

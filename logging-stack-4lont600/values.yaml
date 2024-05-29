@@ -43,7 +43,7 @@ fluent-bit:
           Name tail
           Path /var/log/containers/test-pod*.log
           multiline.parser docker, cri, multiline-regex
-          Tag kube.test.*
+          Tag kube.*
           Mem_Buf_Limit 5MB
           Skip_Long_Lines On      
 

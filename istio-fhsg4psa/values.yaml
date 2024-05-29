@@ -1,4 +1,4 @@
-certificate_arn: {}
+certificate_arn: arn:aws:acm:ap-northeast-2:058264080721:certificate/af004e37-faf6-45b7-a0cb-76525c341fe8
 
 global:
   hub: docker.io/istio
